@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Ali Hyder",
+    "email": "alihyderrohani3@gmail.com",
+    "password": "scrypt:32768:8:1$oTxbewnfLiyG9al5$4a88f2b24d4af41e54c1ca5f82459d29c07db3c4dc7f5fe6b1a9f91e0d1148d5370666caebe76f363309d7aa62bae5932b55498b74ee6399093cb042e5903596",
+    "referral_code": "YE3176",
+    "wallet": 0.0,
+    "referred_by": null,
+    "joined_date": "2025-11-13 18:55:54"
+  }
+]

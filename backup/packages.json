@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Bronze",
+    "price": 450
+  },
+  {
+    "id": 2,
+    "name": "Silver",
+    "price": 1000
+  },
+  {
+    "id": 3,
+    "name": "Diamond",
+    "price": 1250
+  },
+  {
+    "id": 4,
+    "name": "Platinum",
+    "price": 2000
+  }
+]
