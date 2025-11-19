@@ -1,4 +1,4 @@
-# app_postgres.py
+# (full file — copy into app_postgres.py)
 import os
 import json
 import random
@@ -11,7 +11,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, 
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker, scoped_session
 from sqlalchemy.exc import IntegrityError
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(_file_))
 UPLOAD_DIR = os.path.join(BASE_DIR, 'static', 'uploads')
 ADS_DIR = os.path.join(BASE_DIR, 'static', 'ads')
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -21,7 +21,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf', 'mp4', 'webm'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
+app = Flask(_name_, template_folder='templates', static_folder='static')
 app.secret_key = os.environ.get('SESSION_SECRET', 'yourempire-secret-key-change-in-production')
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = UPLOAD_DIR
@@ -36,7 +36,7 @@ Base = declarative_base()
 
 # MODELS
 class User(Base):
-    __tablename__ = 'users'
+    _tablename_ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
     email = Column(String(255), unique=True, nullable=False)
@@ -48,7 +48,7 @@ class User(Base):
     referrals = relationship('User', remote_side=[id])
 
 class Settings(Base):
-    __tablename__ = 'settings'
+    _tablename_ = 'settings'
     id = Column(Integer, primary_key=True)
     commission_percentage = Column(Float, default=50.0)
     min_withdrawal = Column(Float, default=225.0)
@@ -59,13 +59,13 @@ class Settings(Base):
     payment_methods = Column(Text, default='[]')
 
 class Package(Base):
-    __tablename__ = 'packages'
+    _tablename_ = 'packages'
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
     price = Column(Float)
 
 class Payment(Base):
-    __tablename__ = 'payments'
+    _tablename_ = 'payments'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     package_id = Column(Integer, ForeignKey('packages.id'), nullable=True)
@@ -79,7 +79,7 @@ class Payment(Base):
     date = Column(DateTime, default=datetime.utcnow)
 
 class Withdraw(Base):
-    __tablename__ = 'withdraws'
+    _tablename_ = 'withdraws'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     amount = Column(Float)
@@ -90,7 +90,7 @@ class Withdraw(Base):
     date = Column(DateTime, default=datetime.utcnow)
 
 class Ad(Base):
-    __tablename__ = 'ads'
+    _tablename_ = 'ads'
     id = Column(Integer, primary_key=True)
     title = Column(String(255))
     description = Column(Text)
@@ -101,7 +101,7 @@ class Ad(Base):
     created_date = Column(DateTime, default=datetime.utcnow)
 
 class AdView(Base):
-    __tablename__ = 'ad_views'
+    _tablename_ = 'ad_views'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     ad_id = Column(Integer, ForeignKey('ads.id'))
@@ -286,7 +286,7 @@ def buy_package():
         if 'screenshot' in request.files:
             file = request.files['screenshot']
             if file and file.filename and allowed_file(file.filename):
-                filename = secure_filename(f"{session['user_id']}_{datetime.now().strftime('%Y%m%d%H%M%S')}_{file.filename}")
+                filename = secure_filename(f"{session['user_id']}{datetime.now().strftime('%Y%m%d%H%M%S')}{file.filename}")
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 screenshot = filename
 
@@ -633,5 +633,5 @@ def change_admin_password():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)

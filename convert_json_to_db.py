@@ -33,6 +33,7 @@ def import_users():
     SESSION.commit()
     print('Imported users.json')
 
+
 def import_settings():
     path = 'settings.json'
     if not os.path.exists(path):
@@ -63,7 +64,7 @@ def import_settings():
     SESSION.commit()
     print('Imported settings.json')
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     import_users()
     import_settings()
     print('Import finished.')
